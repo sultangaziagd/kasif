@@ -1,19 +1,22 @@
-
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Web uygulamanızın Firebase konfigürasyonu
+// Verileri .env dosyasından çekiyoruz
 const firebaseConfig = {
-  apiKey: "AIzaSyBk2jWt9KeWH8-FYcsJqsvnAEriFc4jMOA",
-  authDomain: "kasif-da96e.firebaseapp.com",
-  projectId: "kasif-da96e",
-  storageBucket: "kasif-da96e.firebasestorage.app",
-  messagingSenderId: "483654734660",
-  appId: "1:483654734660:web:022630f74145d3d0ff3d11"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID
 };
 
 // Firebase'i başlat
 const app = initializeApp(firebaseConfig);
 
-// Firestore veritabanı referansını dışa aktar
+// Auth ve Database servislerini dışarı aktar (Uygulamanın diğer yerlerinde kullanmak için)
+export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+export default app;
